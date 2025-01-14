@@ -16,13 +16,13 @@ export async function send_otp(req, res) {
         message: "Email is required",
       });
     }
-    // const isUserEmail = await Users.findOne({ email: req.body.email });
-    // if (!isUserEmail) {
-    //   return res.send({
-    //     success: false,
-    //     message: "User does not exist, please register first",
-    //   });
-    // }
+    const isUserEmail = await AdminEmail.findOne({ email: req.body.email });
+    if (!isUserEmail) {
+      return res.send({
+        success: false,
+        message: "User does not exist, please register first",
+      });
+    }
     const otp = randomBytes(3).toString("hex");
     const mailOptions = {
       from: "housearena.sam@gmail.com",
